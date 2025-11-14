@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Practica 2</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>    
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+       background-color: #fff;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-areas:
+            "sector1 sector2"
+            "sector1 sector3"
+            "sector4 sector4";
+        grid-template-columns: 250px 250px;
+        grid-template-rows: 200px 200px 120px;
+        gap: 15px;
+     }
+
+    #sector1, #sector2, #sector3, #sector4 {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+      border: 1px solid #000000;
+      transition: all 0.4s ease;
+    }
+    #sector1 { grid-area: sector1; background-color: #bfffc2; color: green; }
+    #sector2 { grid-area: sector2; background-color: #bff5ff; color: #0066aa; }
+    #sector3 { grid-area: sector3; background-color: #ffd0a1; color: #a63a00; }
+    #sector4 { grid-area: sector4; background-color: #f5b3ff; color: #800080; }
+    #alerta {
+      display: none;
+      color: red;
+      font-weight: bold;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "sector1"
+          "sector2"
+          "sector3"
+          "sector4";
+      }
+      #sector1, #sector2, #sector3, #sector4 {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div id="sector1">Sector 1</div>
+    <div id="sector2">Sector 2</div>
+    <div id="alerta">Esta es la sala de reuniones</div>
+    <div id="sector3">Sector 3</div>
+    <div id="sector4">Sector 4</div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      $("#sector1").on("mouseenter", function() {
+        Swal.fire({
+          title: "Esta es el área de recreación",
+          icon: "info",
+          confirmButtonText: "Entendido",
+          timer: 3000,
+          timerProgressBar: true
+        });
+      });
+      $("#sector2").on("mouseenter", function() {
+        $("#alerta").fadeIn();
+      });
+      $("#sector2").on("mouseleave", function() {
+        $("#alerta").fadeOut();
+      });
+      $("#sector3").on("mouseenter", function() {
+        $(this).fadeOut();
+      });
+      $("#sector3").on("mouseleave", function() {
+        const elemento = $(this);
+        setTimeout(function() {
+          elemento.fadeIn();
+        }, 2000);
+      });
+      $("#sector4").on("mouseenter", function() {
+        $(this).css("background-color", "lightblue");
+        $(this).css("border", "none");
+      });
+      $("#sector4").on("mouseleave", function() {
+        $(this).css("background-color", "#f5b3ff");
+        $(this).css("border", "1px solid #000000");
+      });
+    });
+  </script>
+</body>
+</html>

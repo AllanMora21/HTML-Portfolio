@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Practica 3</title>
+    <
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/le-frog/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 50px;
+    }
+    #progressbar {
+        width: 300px;
+        height: 30px;
+        margin-bottom: 20px;
+    }
+    #spinner {
+        width: 100px;
+    }
+    #tabs {
+        margin-top: 50px;
+    }
+    h1 {
+        margin-bottom: 20px;
+    }
+</style>
+<body>
+    <h1>Progress Bar</h1>
+    <div id="progressbar"></div>
+    <input id="spinner">
+    <script>
+        $(function() {
+            $("#progressbar").progressbar({
+                value: 0
+            });
+            $("#spinner").spinner({
+                min: 0,
+                max: 100,
+                spin: function(event, ui) { actualizaProgressBar(ui.value); },
+                change: function() { actualizaProgressBar($(this).spinner("value")); }
+            });
+            function actualizaProgressBar(valor){
+                $("#progressbar").progressbar("value", valor);
+                if(valor >= 100){
+                    Swal.fire({
+                        icon: "success",
+                        title: "¡Completado!",
+                        text: "El progreso ha llegado al 100%",
+                        confirmButtonText: "Aceptar"
+                    });
+                }
+            }
+        });
+    </script>
+
+    <h1>Tabs</h1>
+<div id ="tabs">
+  <ul>
+    <li><a href="#tab1">Tab 1</a></li>
+    <li><a href="#tab2">Tab 2</a></li>
+    <li><a href="#tab3">Tab 3</a></li>    
+    </ul>
+    <div id="tab1">
+     <iframe 
+         src="https://www.youtube.com/embed/w8RT2phpxFM?si=q0E8jtU5NQIvSSev" 
+         width="560" 
+        height="315" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+    </iframe>
+    </div>
+    <div id="tab2">
+        <iframe 
+         src="https://www.youtube.com/embed/MC09Fkzz3Xo?si=jwyLaad6i5_dErBM" 
+         width="560" 
+        height="315" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+    </iframe>
+    </div> 
+
+    <div id="tab3">
+        <iframe 
+         src="https://www.youtube.com/embed/5Mv5xoz08Mo?si=WPLlhSuxuhcigB94" 
+         width="560" 
+        height="315" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+    </iframe>
+    </div>
+<script>
+    $("#tabs").tabs();
+</script>
+
+</body>
+</html>
+
